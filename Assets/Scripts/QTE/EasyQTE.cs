@@ -17,10 +17,16 @@ public class EasyQTE : QTE {
     private bool playing = false;
     private RectTransform pointTransform;
 
+    // 透明进入、消失
+    private CanvasGroup canvasGroup;
+    private float targetAlpha = 1f;
+    private float alphaVelocity = 0;
+    private float FadeTime = 0.2f;
 
     private void Start() {
         width = GetComponent<RectTransform>().rect.width;
         pointTransform = PointBtn.GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
 
         // 按钮随机位置(anchoredPosition)
         float pointWidth = pointTransform.rect.width;
@@ -30,6 +36,9 @@ public class EasyQTE : QTE {
         // 按钮绑定事件
         PointBtn.onClick.AddListener(TryHit);
 
+        // 透明化 Alpha = 0
+        canvasGroup.alpha = 0f;
+
         // 计算生命周期并定时销毁
         duration = width / (Speed * 10);
         Destroy(gameObject, duration + 1f);
@@ -37,6 +46,16 @@ public class EasyQTE : QTE {
 
 
     private void Update() {
+        // 透明动画
+        if (canvasGroup.alpha != targetAlpha) {
+            float alpha = Mathf.SmoothDamp(canvasGroup.alpha, targetAlpha, ref alphaVelocity, FadeTime);
+            canvasGroup.alpha = alpha;
+            if (Mathf.Abs(alpha - targetAlpha) < 0.0001) {
+                canvasGroup.alpha = targetAlpha;
+            }
+        }
+
+        // EasyQTE 运行
         if (playing) {
             Vector3 hitPos = HitTransform.anchoredPosition;
             hitPos.x += Speed * 10 * Time.deltaTime;
@@ -46,6 +65,7 @@ public class EasyQTE : QTE {
             if (hitPos.x >= width) {
                 playing = false;
                 score = 0;
+                targetAlpha = 0f;
                 print("EasyQTE 得分: " + score);
             }
         }
@@ -71,6 +91,10 @@ public class EasyQTE : QTE {
         else {
             score = PunishScore;
         }
+
+        // 透明化消失
+        targetAlpha = 0f;
+        FadeTime = 0.35f;
 
         print("EasyQTE 得分: " + score);
         Destroy(gameObject, 1f);

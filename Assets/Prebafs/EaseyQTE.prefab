@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 222217862052231870}
   - component: {fileID: 114522202840389326}
   - component: {fileID: 114473675865894392}
+  - component: {fileID: 225394886905068270}
   m_Layer: 5
   m_Name: EaseyQTE
   m_TagString: Untagged
@@ -279,3 +280,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225394886905068270
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812575085192024}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

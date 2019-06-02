@@ -8,7 +8,7 @@ public class Bubble : MonoBehaviour {
     public float FadeTime = 0.35f;
     public Text Text;
 
-    private Image background;
+    private CanvasGroup canvasGroup;
     private float targetAlpha = 0f;
     private float alphaVelocity = 0;
 
@@ -16,8 +16,8 @@ public class Bubble : MonoBehaviour {
 
 
     private void Start() {
-        background = GetComponent<Image>();
-        Fade(0f);   // 先隐身
+        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f;
     }
 
     private void Update() {
@@ -31,25 +31,18 @@ public class Bubble : MonoBehaviour {
         }
 
         // 淡化动画
-        if (background.color.a != targetAlpha) {
-            float alpha = Mathf.SmoothDamp(background.color.a, targetAlpha, ref alphaVelocity, FadeTime);
-            Fade(alpha);
+        if (canvasGroup.alpha != targetAlpha) {
+            float alpha = Mathf.SmoothDamp(canvasGroup.alpha, targetAlpha, ref alphaVelocity, FadeTime);
+            canvasGroup.alpha = alpha;
+            if (Mathf.Abs(alpha - targetAlpha) < 0.0001) {
+                canvasGroup.alpha = targetAlpha;
+            }
         }
     }
 
     public void Bub(string text,float time = 3f) {
         Text.text = text;
         timer = time;
-    }
-
-    // 辅助--调整物体及子物体Alpha透明度
-    private void Fade(float alpha) {
-        Color BGColor = background.color;
-        Color TextColor = Text.color;
-        BGColor.a = alpha;
-        TextColor.a = alpha;
-        background.color = BGColor;
-        Text.color = TextColor;
     }
 
 }
