@@ -63,6 +63,7 @@ public class Device : MonoBehaviour {
        
         GameObject NowQTE=Instantiate(QTE[GameNum],Pos);
         NowQTE.transform.parent = Pos;
+        NowQTE.GetComponent<QTE>().Play();
 
 
     }
