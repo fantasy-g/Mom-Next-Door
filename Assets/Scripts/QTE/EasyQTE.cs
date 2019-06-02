@@ -92,6 +92,7 @@ public class EasyQTE : QTE {
             score = PunishScore;
         }
 
+        
         // 透明化消失
         targetAlpha = 0f;
         FadeTime = 0.35f;

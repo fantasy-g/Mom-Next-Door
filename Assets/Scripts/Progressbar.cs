@@ -13,8 +13,7 @@ public class Progressbar : MonoBehaviour
     public Text T;
    
    public Button B;
-    public bool IsFinish = false;
-    public bool CanFill = false;
+    
 
    
     // Use this for initialization
@@ -27,27 +26,21 @@ public class Progressbar : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    if (CanFill)
+	   
 	    {
 	        DOTween.To(() => num, x => num = x, 101, 5);
 
 	        ProgressBar.value = (int) num;
 	        T.text = ProgressBar.value.ToString(CultureInfo.InvariantCulture) + "%";
 	       
-	        if (ProgressBar.value == 100)
+	        if (num >100.3)
 	        {
-	            CanFill = false;
-	            Device.instance.IsFinish = true;
-                Destroy(this.gameObject);
+	            Destroy(this.gameObject);
 	        }
 	    }
 	}
 
-    public void C()
-    {
-        CanFill = true;
-    }
-
+    
    
     
     

@@ -9,7 +9,7 @@ public class test : MonoBehaviour
     public Bubble Bubble;
 
     void Start() {
-        QTE.Play();
+        //QTE.Play();
         Bubble.Bub("嘿嘿嘿", 3f);
     }
 
