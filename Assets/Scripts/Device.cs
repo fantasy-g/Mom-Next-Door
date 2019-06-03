@@ -6,19 +6,19 @@ using DG.Tweening;
 
 public class Device : MonoBehaviour {
     public List<GameObject>QTE = new List<GameObject>();
-    public QTE qte;
-    public int Temp = 0;  //暂存心情
+   
+    public int TempScore = 0;  //暂存心情
     private int GameNum = 0;
     //private string QteName;
     public GameObject GameList;
     public GameObject ProgressBar;
    public float ProgressBarTimer = 0;
-    public float GetScoreTimer = 0;
-    public bool CanFill = false;
+   
+    private bool CanFill = false;
     private GameObject NowQTE;
-    private bool CanGetScore = false;
+    
     private Transform Pos;
-    private bool StartGetScore = false;
+    
     private float duration = 0;
     void Start()
     {
@@ -41,18 +41,7 @@ public class Device : MonoBehaviour {
             }
         }
 
-        if (StartGetScore)
-        {
-            GetScoreTimer += Time.deltaTime;
-           
-            ////取分数
-
-            if (GetScoreTimer > duration&&GetScoreTimer<duration+0.9)
-            {
-                Debug.Log(Temp);
-                GetScoreTimer = 0;
-            }
-        }
+       
 
     }
     public void ChooseGame()
@@ -81,7 +70,7 @@ public class Device : MonoBehaviour {
     //}
     public void GetScore()
     {
-       Temp+= NowQTE.GetComponent<QTE>().GetScore();
+       TempScore+= NowQTE.GetComponent<QTE>().GetScore();
         
     }
     public void CreateQte()
@@ -92,7 +81,7 @@ public class Device : MonoBehaviour {
         NowQTE.transform.parent = Pos;
         duration=NowQTE.GetComponent<QTE>().Play();
          NowQTE.GetComponent<QTE>().GetButton().onClick.AddListener(GetScore);
-          StartGetScore = true;
+         
     }
 
     
