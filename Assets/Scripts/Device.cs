@@ -19,6 +19,7 @@ public class Device : MonoBehaviour {
     private bool CanGetScore = false;
     private Transform Pos;
     private bool StartGetScore = false;
+    private float duration = 0;
     void Start()
     {
        
@@ -43,14 +44,14 @@ public class Device : MonoBehaviour {
         if (StartGetScore)
         {
             GetScoreTimer += Time.deltaTime;
-            //取分数
+           
+            ////取分数
 
-            //if (GetScoreTimer > 15)
-            //{
-            //    NowQTE.GetComponent<QTE>().GetScore();
-            //    Debug.Log(NowQTE.GetComponent<QTE>().GetScore());
-            //    GetScoreTimer = 0;
-            //}
+            if (GetScoreTimer > duration&&GetScoreTimer<duration+0.9)
+            {
+                Debug.Log(Temp);
+                GetScoreTimer = 0;
+            }
         }
 
     }
@@ -61,31 +62,37 @@ public class Device : MonoBehaviour {
     public void PlayQte(int n)
     {
        
-       Pos=GameObject.Find("QtePos").transform;
-      GameList.gameObject.SetActive(false);
+        Pos =GameObject.Find("QtePos").transform;
+      //GameList.gameObject.SetActive(false);
         
         //根据玩家选择的游戏选择QTE
           GameNum = n;
         //生成进度条
         Instantiate(ProgressBar.gameObject,Pos);
         CanFill = true;
-        StartGetScore = true;
+      
     }
 
     //public void EndQte()
     //{
-    
-    //    //销毁QTE
-    //   Destroy(GameObject.Find(QteName));
-    //}
 
+    //    //销毁QTE
+    //    Destroy(NowQTE.gameObject);
+    //}
+    public void GetScore()
+    {
+       Temp+= NowQTE.GetComponent<QTE>().GetScore();
+        
+    }
     public void CreateQte()
     {
        
         NowQTE=Instantiate(QTE[GameNum],Pos);
+       
         NowQTE.transform.parent = Pos;
-        NowQTE.GetComponent<QTE>().Play();
-        
+        duration=NowQTE.GetComponent<QTE>().Play();
+         NowQTE.GetComponent<QTE>().GetButton().onClick.AddListener(GetScore);
+          StartGetScore = true;
     }
 
     
