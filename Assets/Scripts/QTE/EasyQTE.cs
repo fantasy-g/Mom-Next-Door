@@ -77,6 +77,10 @@ public class EasyQTE : QTE {
         return duration;
     }
 
+    public override Button GetButton() {
+        return PointBtn;
+    }
+
 
     public void TryHit() {
         playing = false;
@@ -91,7 +95,6 @@ public class EasyQTE : QTE {
         else {
             score = PunishScore;
         }
-
         
         // 透明化消失
         targetAlpha = 0f;
