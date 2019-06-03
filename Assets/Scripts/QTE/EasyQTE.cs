@@ -23,7 +23,7 @@ public class EasyQTE : QTE {
     private float alphaVelocity = 0;
     private float FadeTime = 0.2f;
 
-    private void Start() {
+    private void Awake() {
         width = GetComponent<RectTransform>().rect.width;
         pointTransform = PointBtn.GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
@@ -79,7 +79,7 @@ public class EasyQTE : QTE {
 
 
     public void TryHit() {
-        Speed = 0;
+        playing = false;
 
         float hitX = HitTransform.anchoredPosition.x;
         float pointX = pointTransform.anchoredPosition.x;
