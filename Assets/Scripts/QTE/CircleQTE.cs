@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CircleQTE : QTE {
 
@@ -81,6 +82,10 @@ public class CircleQTE : QTE {
         return duration * KeyCount;
     }
 
+    public override Button GetButton() {
+        return GetComponent<Button>();
+    }
+
     private int TryHit() {
         timer = -1;   // 切换下一个按键
 
@@ -101,6 +106,10 @@ public class CircleQTE : QTE {
         }
     }
 
+    public void TestEvent() {
+        print("Test Event 触发成功");
+    }
+
     private bool NextKeyQTE() {
         if (keyCodes.Count == 0) {
             return false;
@@ -118,8 +127,13 @@ public class CircleQTE : QTE {
 
     private void Finish() {
         Debug.Log("Finish CircleQTE with score : " + score);
+        ExecuteEvents.Execute<IPointerClickHandler>(
+            GetComponent<Button>().gameObject,
+            new PointerEventData(EventSystem.current),
+            ExecuteEvents.pointerClickHandler
+            );
         playing = false;
-        Destroy(gameObject, .5f);
+        Destroy(gameObject, 1f);
     }
 
     private KeyCode GetKeyCode(string key = null) {
