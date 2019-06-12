@@ -9,7 +9,6 @@ public class test : MonoBehaviour
     public Bubble Bubble;
 
     void Start() {
-        //QTE.Play();
         Bubble.Bub("嘿嘿嘿", 3f);
     }
 
@@ -26,6 +25,10 @@ public class test : MonoBehaviour
 
         int index = Random.Range(0, texts.Count - 1);
         Bubble.Bub(texts[index], Random.Range(2f, 4f));
+    }
+
+    public void TestQTE() {
+        QTE.Play();
     }
 
 }
