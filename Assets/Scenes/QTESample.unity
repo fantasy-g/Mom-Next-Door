@@ -309,14 +309,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QTE:
   - {fileID: 1812575085192024, guid: 416bad782dc983a409aa151f0022f1b8, type: 2}
-  qte: {fileID: 0}
-  Temp: 0
+  TempScore: 0
   GameList: {fileID: 1318722145}
   ProgressBar: {fileID: 1032174691313668, guid: ddb6685dce27d7a449809a648dd95ef3,
     type: 2}
   ProgressBarTimer: 0
-  GetScoreTimer: 0
-  CanFill: 0
 --- !u!65 &749846167
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -799,12 +796,12 @@ Prefab:
     - target: {fileID: 224324453975002494, guid: f08d208ed41e1b5488271dd2d7bdfd20,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -2336
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 224324453975002494, guid: f08d208ed41e1b5488271dd2d7bdfd20,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 224324453975002494, guid: f08d208ed41e1b5488271dd2d7bdfd20,
         type: 2}
