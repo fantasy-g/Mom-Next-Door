@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameDevice: {fileID: 0}
-  Joy: 0
+  Joy: 100
   Study: 0
   mood: 0
   Homework: {fileID: 988729593}
@@ -1472,7 +1472,7 @@ MonoBehaviour:
   son: {fileID: 691750595}
   ShowTimeText: {fileID: 636991023}
   SchoolTime: 28800
-  timespeed: 1
+  timespeed: 10000
   hour: 0
   minute: 0
   second: 0

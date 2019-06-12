@@ -45,11 +45,12 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (SchoolTime <= 0 && gameover == false)
+        if (SchoolTime <= 0)
         {
             SchoolTime = 0;
             CheckEndings();
-            gameover = true;
+            if(gameover == false)
+                gameover = true;
         }
         else
             SchoolTime -= Time.deltaTime * timespeed;
@@ -129,6 +130,8 @@ public class LevelManager : MonoBehaviour
     //}
     public void CheckEndings()
     {
+        if (gameover == true)
+            return;
         if(SchoolTime!=0)
         {
             mom_discover_son = true;

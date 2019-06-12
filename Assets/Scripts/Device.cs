@@ -48,7 +48,7 @@ public class Device : MonoBehaviour {
         switch (gameState)
         {   
             case GameState.Homework:
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     Homework.SetActive(false);
                     Games[0].SetActive(false);
