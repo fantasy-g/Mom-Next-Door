@@ -15,7 +15,7 @@ public class Son : MonoBehaviour {
     public List<GameObject> Games;
     public GameObject StartInterface;
     private GameObject go;
-    public GameObject GameList;
+    //public GameObject GameList;
     private void Awake()
     {
         Joy = 0;
@@ -53,29 +53,30 @@ public class Son : MonoBehaviour {
             Time.timeScale = 1f;
             //画面恢复彩色
         }
-        switch (SonStatus)
-        {
-            case SonState.homework:
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    Homework.SetActive(false);
-                    Games[0].SetActive(false);
-                    Games[1].SetActive(true);
-                    //GameList.SetActive(true);                  
-                    SonStatus = SonState.PC;
-                    OpenComputer();
-                }
-                break;
-            case SonState.PC:
-                if (Input.GetKeyDown(KeyCode.Escape)){
-                    Homework.SetActive(true);
-                    SonStatus = SonState.homework;
-                    Games[0].SetActive(true);
-                    Games[1].SetActive(false);
-                    Games[2].SetActive(false);                     
-                }
-                break;
-        }
+        //switch (SonStatus)
+        //{
+        //    //case SonState.homework:
+        //    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+        //    //    {
+        //    //        Homework.SetActive(false);
+        //    //        //Games[0].SetActive(false);
+        //    //        //Games[1].SetActive(true);
+        //    //        //GameList.SetActive(true);                  
+        //    //        SonStatus = SonState.PC;
+        //    //        OpenComputer();
+        //    //    }
+        //    //    break;
+        //    case SonState.PC:
+        //        if (Input.GetKeyDown(KeyCode.Escape))
+        //        {
+        //            Homework.SetActive(true);
+        //            SonStatus = SonState.homework;
+        //            Games[0].SetActive(true);
+        //            Games[1].SetActive(false);
+        //            Games[2].SetActive(false);
+        //        }
+        //        break;
+        //}
 
     }
     public void ChangeState(SonState sonState)
@@ -83,23 +84,22 @@ public class Son : MonoBehaviour {
         SonStatus = sonState;
 
     }
-    private void OpenComputer()
-    {
-        //播放开机音乐
-        go.transform.DOMoveZ(0.1f, 3f)
-            .OnComplete(new TweenCallback(OnGames));
+    //private void OpenComputer()
+    //{
+    //    //播放开机音乐
+    //   go.transform.DOMoveZ(0.1f, 3f).OnComplete(new TweenCallback(OnGames));
         
-    }
-    private void OnGames()
-    {
-        Games[1].SetActive(false);
-        Games[2].SetActive(true);
-    }
-    private void AddQte()
-    {
-        GameObject go = new GameObject();
-        go.transform.DOMoveZ(0.1f, 3f)
-            .OnComplete(new TweenCallback(OnGames));
-    }
+    //}
+    //private void OnGames()
+    //{
+    //    Games[1].SetActive(false);
+    //    Games[2].SetActive(true);
+    //}
+    //private void AddQte()
+    //{
+    //    GameObject go = new GameObject();
+    //    go.transform.DOMoveZ(0.1f, 3f)
+    //        .OnComplete(new TweenCallback(OnGames));
+    //}
 
 }
