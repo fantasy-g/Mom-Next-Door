@@ -333,13 +333,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Games: []
+  Books: []
+  Bubbles: []
   QTE:
   - {fileID: 1812575085192024, guid: 416bad782dc983a409aa151f0022f1b8, type: 2}
+  gameState: 0
   TempScore: 0
+  HomeworkScore: 0
+  CanChange: 1
   GameList: {fileID: 1318722145}
   ProgressBar: {fileID: 1032174691313668, guid: ddb6685dce27d7a449809a648dd95ef3,
     type: 2}
   ProgressBarTimer: 0
+  DoHomework: 1
   Homework: {fileID: 0}
 --- !u!65 &749846167
 BoxCollider:
@@ -973,6 +979,21 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114114126018113538, guid: 9a0b10472f101bd42b44f04062ec297c,
+        type: 2}
+      propertyPath: KeyCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114685732014632958, guid: 9a0b10472f101bd42b44f04062ec297c,
+        type: 2}
+      propertyPath: m_CellSize.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114685732014632958, guid: 9a0b10472f101bd42b44f04062ec297c,
+        type: 2}
+      propertyPath: m_CellSize.y
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a0b10472f101bd42b44f04062ec297c, type: 2}

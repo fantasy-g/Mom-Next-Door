@@ -14,14 +14,17 @@ public class MultiKeyQTE : QTE {
     private bool playing = false;
     private float timer = 0;
     private int PunishScore = -5;
-    
+
+    [SerializeField]
+    private List<Sprite> keySprites = new List<Sprite>();
     private List<KeyCode> keyCodes = new List<KeyCode>();
     private List<KeyCode> backKeyCodes = new List<KeyCode>();
     private List<KeyCode> ArrowKeyCodes = new List<KeyCode> {
             KeyCode.UpArrow,
             KeyCode.DownArrow,
             KeyCode.LeftArrow,
-            KeyCode.RightArrow
+            KeyCode.RightArrow,
+            KeyCode.Space
         };
 
 
@@ -30,9 +33,16 @@ public class MultiKeyQTE : QTE {
     }
 
     private void Start() {
+        // 图片 Sprites 加载
+        foreach (KeyCode key in ArrowKeyCodes) {
+            string spritePath = string.Format("UI/{0}", GetKeyString(key));
+            Sprite sprite = Resources.Load(spritePath, typeof(Sprite)) as Sprite;
+            keySprites.Add(sprite);
+        }
+
         // 随机生成按键
         for (int i = 0; i < KeyCount; i++) {
-            int index = Random.Range(0, ArrowKeyCodes.Count - 1);
+            int index = Random.Range(0, ArrowKeyCodes.Count);
             keyCodes.Add(ArrowKeyCodes[index]);
             backKeyCodes.Add(ArrowKeyCodes[index]);
         }
@@ -127,22 +137,22 @@ public class MultiKeyQTE : QTE {
     private void InstantiateArrowKey() {
         foreach (KeyCode key in backKeyCodes) {
             GameObject go = Instantiate(ArrowKeyPrefab, transform);
-            go.GetComponentInChildren<Text>().text = GetKeyString(key);
+            go.GetComponent<Image>().sprite = keySprites[ArrowKeyCodes.FindIndex(keyCode => keyCode == key)];
         }
     }
 
     private string GetKeyString(KeyCode key) {
         switch (key) {
             case KeyCode.UpArrow:
-                return "↑";
+                return "上";
             case KeyCode.DownArrow:
-                return "↓";
+                return "下";
             case KeyCode.LeftArrow:
-                return "←";
+                return "左";
             case KeyCode.RightArrow:
-                return "→";
+                return "右";
             case KeyCode.Space:
-                return "Space";
+                return "空格";
             default:
                 return "KeyCodeError";
         }
