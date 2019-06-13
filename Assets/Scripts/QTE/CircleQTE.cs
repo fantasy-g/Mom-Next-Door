@@ -53,7 +53,6 @@ public class CircleQTE : QTE {
             // 按错提前结束
             if (tmpScore == PunishScore) {
                 score = 0;
-                timer = 0;
                 Finish();
             }
             score += tmpScore;
@@ -78,6 +77,11 @@ public class CircleQTE : QTE {
             size.x -= Speed * 10 * Time.deltaTime;
             size.y -= Speed * 10 * Time.deltaTime;
             BulletTranform.sizeDelta = size;
+            // 不按按键
+            if (size.x < 1) {
+                score = 0;
+                Finish();
+            }
         }
     }
 
@@ -138,6 +142,7 @@ public class CircleQTE : QTE {
             new PointerEventData(EventSystem.current),
             ExecuteEvents.pointerClickHandler
             );
+        timer = 0;
         playing = false;
         Destroy(gameObject, 0.1f);
     }
