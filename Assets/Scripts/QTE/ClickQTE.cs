@@ -32,7 +32,7 @@ public class ClickQTE : QTE {
         }
         else if (timer < 0) {
             timer = 0;
-            Destroy(gameObject, 0.1f);
+            Finish();
         }
 
         if (playing) {

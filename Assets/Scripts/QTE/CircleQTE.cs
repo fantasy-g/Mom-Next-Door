@@ -50,6 +50,11 @@ public class CircleQTE : QTE {
     private void Update() {
         if (playing && Input.anyKeyDown) {
             int tmpScore = TryHit();
+            // 按错提前结束
+            if (tmpScore == PunishScore) {
+                score = 0;
+                Finish();
+            }
             score += tmpScore;
         }
 
