@@ -114,6 +114,8 @@ public class AudioManager : MonoBehaviour
 
     public void GameBGMPlay(Games game)
     {
+        if (device.gameState == GameState.Homework)
+            DeviceBGM.Stop();
         switch (game)
         {
             case Games.Mario:
