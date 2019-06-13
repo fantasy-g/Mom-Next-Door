@@ -22,4 +22,5 @@ public class Mom : MonoBehaviour {
         }
     }
     private void CheckSon()
+    { }
 }
