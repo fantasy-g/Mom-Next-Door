@@ -125,7 +125,7 @@ public class CircleQTE : QTE {
             return false;
         }
 
-        float randomWidth = Random.Range(rawWidth * 0.3f, rawWidth * 0.8f);
+        float randomWidth = Random.Range(rawWidth * 0.5f, rawWidth * 0.8f);
         BulletTranform.sizeDelta = new Vector2(rawWidth, rawWidth);     // 圈恢复大小
         HitTransform.sizeDelta = new Vector2(randomWidth, randomWidth); // 目标圈随机半径
         KeyText.text = GetKeyString(keyCodes[0]);
