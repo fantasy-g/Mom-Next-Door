@@ -24,7 +24,6 @@ public class Device : MonoBehaviour {
     void Awake()
     {
         gameState =GameState.Homework;
-        go = new GameObject();
     }
 
     void Update()
@@ -35,16 +34,11 @@ public class Device : MonoBehaviour {
             ProgressBarTimer += Time.deltaTime;
             if (ProgressBarTimer > 3)
             {
-                Games[1].SetActive(false);
-                Games[2].SetActive(true);
-
                 CreateQte();
-
                 CanFill = false;
                 ProgressBarTimer = 0;
             }
         }
-    Debug.Log(gameState);
         switch (gameState)
         {   
             case GameState.Homework:
@@ -52,11 +46,9 @@ public class Device : MonoBehaviour {
                 {
                     Homework.SetActive(false);
                     Games[0].SetActive(false);
-                   Games[1].SetActive(true);
+                    Games[1].SetActive(true);
                     GameList.SetActive(true);
                     gameState = GameState.Open;
-                    go.transform.DOMoveZ(0f,3f ).OnComplete(new TweenCallback(OnGames));
-                    Debug.Log("PC");
                 }
                     break;
             case GameState.Open:
@@ -94,13 +86,20 @@ public class Device : MonoBehaviour {
     
     public void PlayQte(int n)
     {
+        if (n == 0) {
+            Games[1].SetActive(false);
+            Games[3].SetActive(true);
+            }
+        if (n == 1)
+        {
+            Games[1].SetActive(false);
+            Games[2].SetActive(true);
+        }
         gameState = GameState.Playing;
         GameList.SetActive(false);
         GameNum = n;
         //播放音效
         //AddQte();
-        
-        
         Pos =GameObject.Find("QtePos").transform;
       //GameList.gameObject.SetActive(false);
         
