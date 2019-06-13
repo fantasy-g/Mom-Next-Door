@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+public enum Endings { NormalEnd,GoodEnd,BadEnd,TrueEnd,CaiEnd,DespairEnd }
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager _instance;
@@ -29,6 +29,8 @@ public class LevelManager : MonoBehaviour
     private bool son_is_despair = false;//心情值为0
 
     private bool gameover=false;
+
+    public List<GameObject> EndingPanels = new List<GameObject>();
 
     private void Awake()
     {
@@ -72,13 +74,15 @@ public class LevelManager : MonoBehaviour
         if(mom_discover_son)
         {
             //被发现玩游戏 被揍 普通结局 
+            EndingPanels[(int)Endings.NormalEnd].SetActive(true);
             Debug.Log("NormalEnding");
             return;
         }
         else if(son_is_despair==true)
         {
             //心情值归0 绝望
-            Debug.Log("绝望结局");
+            Debug.Log("despairend");
+            EndingPanels[(int)Endings.DespairEnd].SetActive(true);
             return;
         }
         //正常结尾
@@ -88,18 +92,21 @@ public class LevelManager : MonoBehaviour
             {
                 //没爽到 但努力学习 好学生结局
                 Debug.Log("GoodEnding");
+                EndingPanels[(int)Endings.GoodEnd].SetActive(true);
                 return;
             }
             else if(!son_is_workinghard)
             {
                 //爽到 但没努力学习 差生结局
                 Debug.Log("BadEnding");
+                EndingPanels[(int)Endings.BadEnd].SetActive(true);
                 return;
             }
             else
             {
                 //既爽到 又努力学习 学神结局
                 Debug.Log("TrueEnding");
+                EndingPanels[(int)Endings.TrueEnd].SetActive(true);
                 return;
             }
         }
@@ -107,6 +114,7 @@ public class LevelManager : MonoBehaviour
         {
             //既没有爽到也没有学习
             Debug.Log("CaiEnding");
+            EndingPanels[(int)Endings.CaiEnd].SetActive(true);
             return;
         }
     }
