@@ -80,7 +80,7 @@ public class ClickQTE : QTE {
             new PointerEventData(EventSystem.current), 
             ExecuteEvents.pointerClickHandler
             );
-        Destroy(gameObject, 0.2f);
+        Destroy(gameObject, 0.1f);
     }
 
 }

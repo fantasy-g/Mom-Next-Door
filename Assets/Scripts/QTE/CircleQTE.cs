@@ -53,6 +53,7 @@ public class CircleQTE : QTE {
             // 按错提前结束
             if (tmpScore == PunishScore) {
                 score = 0;
+                timer = 0;
                 Finish();
             }
             score += tmpScore;
@@ -138,7 +139,7 @@ public class CircleQTE : QTE {
             ExecuteEvents.pointerClickHandler
             );
         playing = false;
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.1f);
     }
 
     private KeyCode GetKeyCode(string key = null) {

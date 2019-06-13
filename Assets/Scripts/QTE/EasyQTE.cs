@@ -101,7 +101,7 @@ public class EasyQTE : QTE {
         FadeTime = 0.35f;
 
         print("EasyQTE 得分: " + score);
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.1f);
     }
 
 }
