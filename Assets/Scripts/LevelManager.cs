@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public enum Endings { NormalEnd,GoodEnd,BadEnd,TrueEnd,CaiEnd,DespairEnd }
+using UnityEngine.SceneManagement;
+public enum Endings { TimeOutEnd,HomeworkEnd,GameFinishEnd,DefeatEnd}
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager _instance;
@@ -34,10 +35,19 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if(_instance==null)
+        /* if(_instance==null)
+         {
+             _instance = this;
+             DontDestroyOnLoad(gameObject);
+         }
+         else
+         {
+             Destroy(gameObject);
+             return;
+         }*/
+         if(_instance==null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -51,9 +61,7 @@ public class LevelManager : MonoBehaviour
         if (SchoolTime <= 0)
         {
             SchoolTime = 0;
-            CheckEndings();
-            if(gameover == false)
-                gameover = true;
+            GameOver(Endings.TimeOutEnd);
         }
         else
             SchoolTime -= Time.deltaTime * timespeed;
@@ -66,114 +74,20 @@ public class LevelManager : MonoBehaviour
                                             hour, minute, second);
     }
 
-    public void GameOver()
+    public void GameOver(Endings GameStatus)
     {
         //被麻麻发现
         if (gameover == true)
             return;
-        if(mom_discover_son)
-        {
-            //被发现玩游戏 被揍 普通结局 
-            EndingPanels[(int)Endings.NormalEnd].SetActive(true);
-            Debug.Log("NormalEnding");
-            return;
-        }
-        else if(son_is_despair==true)
-        {
-            //心情值归0 绝望
-            Debug.Log("despairend");
-            EndingPanels[(int)Endings.DespairEnd].SetActive(true);
-            return;
-        }
-        //正常结尾
-        if(son_is_happy||son_is_workinghard)
-        {
-            if(!son_is_happy)
-            {
-                //没爽到 但努力学习 好学生结局
-                Debug.Log("GoodEnding");
-                EndingPanels[(int)Endings.GoodEnd].SetActive(true);
-                return;
-            }
-            else if(!son_is_workinghard)
-            {
-                //爽到 但没努力学习 差生结局
-                Debug.Log("BadEnding");
-                EndingPanels[(int)Endings.BadEnd].SetActive(true);
-                return;
-            }
-            else
-            {
-                //既爽到 又努力学习 学神结局
-                Debug.Log("TrueEnding");
-                EndingPanels[(int)Endings.TrueEnd].SetActive(true);
-                return;
-            }
-        }
-        else
-        {
-            //既没有爽到也没有学习
-            Debug.Log("CaiEnding");
-            EndingPanels[(int)Endings.CaiEnd].SetActive(true);
-            return;
-        }
+        gameover = true;
+        Time.timeScale = 0;
+        AudioManager.Instance.EndAudioPlay(GameStatus);
+        EndingPanels[(int)GameStatus].SetActive(true);
+
     }
-    
-    //public void CheckEndings(Endings ending)
-    //{
-    //    switch(ending)
-    //    {
-    //        case Endings.normalend:
-    //            mom_discover_son = true;
-    //            break;
-    //        case Endings.goodend:
-    //            son_is_workinghard = true;
-    //            break;
-    //        case Endings.badend:
-    //            break;
-    //        case Endings.trueend:
-    //            son_is_workinghard = true;
-    //            son_is_happy = true;
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //    CheckGameOver();
-
-    //}
-    public void CheckEndings()
+    public void restartGame()
     {
-        if (gameover == true)
-            return;
-        if(SchoolTime!=0)
-        {
-            if (son.Joy == 0)
-                son_is_despair = true;
-            else
-                mom_discover_son = true;
-        }
-        else
-        {
-            mom_discover_son = false;
-            son_is_despair = false;
-            if (son.Joy == 100)
-            {
-                son_is_happy = true;
-            }
-            else
-            {
-                son_is_happy = false;
-            }
-            if (son.Study == 100)
-            {
-                son_is_workinghard = true;
-            }
-            else
-            {
-                son_is_workinghard = false;
-            }
-        }
-
-        GameOver();
+        SceneManager.LoadScene(0);
+        SchoolTime = 10800f;
     }
 }

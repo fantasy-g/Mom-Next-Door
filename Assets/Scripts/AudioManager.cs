@@ -11,18 +11,18 @@ public class AudioManager : MonoBehaviour
 
     //
     public enum MomClips { footstep,opendoor };
-    public enum SonClips { warning };
+    public enum SonClips { warning ,BGM};
     public enum Games { Mario , diwurenge };
     public enum GameClips { BGM , QTEsuccess , QTEfail }
-
     public AudioSource SonSource;
     public AudioSource MomSource;
     public AudioSource DeviceSource;
     public AudioSource DeviceBGM;
-
+    public AudioSource EndGamesSource;
     //声音种类
     public List<AudioClip> MomClip = new List<AudioClip>();
     public List<AudioClip> SonClip = new List<AudioClip>();
+    public List<AudioClip> EndGamesClip = new List<AudioClip>();
     public List<List<AudioClip>> DeviceClip = new List<List<AudioClip>>();//暂时不用
     public List<AudioClip> GameClip_Mario = new List<AudioClip>();
     public List<AudioClip> GameClip_Diwu = new List<AudioClip>();
@@ -50,6 +50,7 @@ public class AudioManager : MonoBehaviour
         SonSource = this.GetComponent<AudioSource>();
         DeviceSource = this.GetComponent<AudioSource>();
         DeviceBGM = this.GetComponent<AudioSource>();
+        EndGamesSource=this.GetComponent<AudioSource>();
     }
 
     private void PutAudio()
@@ -57,7 +58,11 @@ public class AudioManager : MonoBehaviour
         //获取音频文件到DeviceClip
         
     }
-
+    public void EndAudioPlay(Endings ending)
+    {
+        EndGamesSource.clip = EndGamesClip[(int)ending];
+        EndGamesSource.Play();
+    }
     //播放妈妈音效
     public void MomAudioPlay(MomClips choice)
     {

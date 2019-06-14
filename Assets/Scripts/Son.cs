@@ -23,10 +23,10 @@ public class Son : MonoBehaviour {
     }
     private void Update()
     {
-        if (Input.anyKeyDown && StartInterface.activeInHierarchy) {
+        /*if (Input.anyKeyDown && StartInterface.activeInHierarchy) {
             StartInterface.SetActive(false);//进入游戏界面
             Time.timeScale = 1;
-        }
+        }*/
 
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -40,7 +40,7 @@ public class Son : MonoBehaviour {
         if (Input.GetMouseButtonDown(1))
         {
             // AudioManager.Instance.MomAudioPlay(AudioManager.MomClips.footstep);
-            Time.timeScale = 0.5f;
+            Time.timeScale = 0.3f;
             //画面变成黑白
         }
         if (Input.GetMouseButtonUp(1))

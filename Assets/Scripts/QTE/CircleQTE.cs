@@ -9,7 +9,7 @@ public class CircleQTE : QTE {
     public float Speed = 10;
     public int KeyCount = 5;
     public int PrizeScore = 10;
-    public int PunishScore = -5;
+    public int PunishScore = 0;
     public int Offset = 10;
 
     public Text KeyText;
